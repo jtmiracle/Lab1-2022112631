@@ -50,7 +50,7 @@ public class MainFrame extends JFrame {
         panel.add(button("2. 查询桥接词", e -> queryBridge()));
         panel.add(button("3. 生成新文本 (插入桥接词)", e -> generateNew()));
         // 在 MainFrame.java 的构造函数中，替换原有的“最短路径”按钮那一行：
-        panel.add(button("4. 最短路径", e -> {
+        /*panel.add(button("4. 最短路径", e -> {
             String w1 = JOptionPane.showInputDialog(this, "起点 word1:");
             if (w1 == null || w1.isBlank()) return;
 
@@ -76,6 +76,43 @@ public class MainFrame extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE
                 );
             }
+        }));*/
+        // 在图形化界面中添加“最短路径”按钮时的逻辑——要求两个参数均非空，否则弹出提示
+        panel.add(button("4. 最短路径", e -> {
+            // 弹出第一个对话框，输入起点
+            String w1 = JOptionPane.showInputDialog(this, "起点 word1:");
+            if (w1 == null || w1.isBlank()) {
+                // 起点为空时，直接弹出提示，并返回
+                JOptionPane.showMessageDialog(
+                        this,
+                        "请输入起点和终点，均不能为空。",
+                        "输入错误",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            // 弹出第二个对话框，输入终点
+            String w2 = JOptionPane.showInputDialog(this, "终点 word2:");
+            if (w2 == null || w2.isBlank()) {
+                // 终点为空时，也弹出提示并返回
+                JOptionPane.showMessageDialog(
+                        this,
+                        "请输入起点和终点，均不能为空。",
+                        "输入错误",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            // 如果走到这里，说明 w1 和 w2 均非空，调用两参版本进行计算
+            String result = graph.calcShortestPath(w1, w2);
+            JOptionPane.showMessageDialog(
+                    this,
+                    result,
+                    String.format("从 \"%s\" 到 \"%s\" 的最短路径", w1, w2),
+                    JOptionPane.INFORMATION_MESSAGE
+            );
         }));
         panel.add(button("5. 计算 PageRank", e -> calcPageRank()));
         panel.add(button("6. 随机游走", e -> randomWalk()));
@@ -124,10 +161,32 @@ public class MainFrame extends JFrame {
     }
 
     private void randomWalk() {
-        String walk = RandomWalker.randomWalk(graph.getGraph());
-        JOptionPane.showMessageDialog(this, walk);
-        // 同时写磁盘
+        RandomWalker walker = new RandomWalker(graph.getGraph());
+
+        while (true) {
+            int choice = JOptionPane.showConfirmDialog(
+                    this,
+                    walker.getPath() + "\n\n是否继续游走？",
+                    "随机游走",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (choice != JOptionPane.YES_OPTION) break;
+
+            String next = walker.step();
+            if (next == null || !walker.canStep()) {
+                JOptionPane.showMessageDialog(this, "已到达终点或无可用路径，游走结束。");
+                break;
+            }
+        }
+
+        // 展示完整路径
+        String walk = walker.getPath();
+        JOptionPane.showMessageDialog(this, "最终路径：\n" + walk);
+
+        // 保存文件
         FileUtils.writeStringToFile(walk, "random_walk.txt");
-        JOptionPane.showMessageDialog(this, "已保存到 random_walk.txt");
+        JOptionPane.showMessageDialog(this, "路径已保存到 random_walk.txt");
     }
+
 }

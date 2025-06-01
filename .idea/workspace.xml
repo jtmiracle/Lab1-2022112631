@@ -4,16 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0e48620-3f20-4ad8-b6e7-7412b13188f6" name="更改" comment="" />
+    <list default="true" id="a0e48620-3f20-4ad8-b6e7-7412b13188f6" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/2022112631-蒋利权-lab1-2025.doc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/text-graph-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/text-graph-app/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2wOjtRFGBWq1Q2EbVteeI8lIXcx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -23,6 +29,8 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "2022112631",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -43,6 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1745919729361</updated>
       <workItem from="1745919731378" duration="29000" />
+      <workItem from="1748349404340" duration="78000" />
     </task>
     <servers />
   </component>
